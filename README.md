@@ -1,0 +1,1 @@
+# crypto-tickers-visualizer
