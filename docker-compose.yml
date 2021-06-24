@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  app:
+    container_name: crypto-tickers-app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment: 
+        INFLUXDB_HOST: http://crypto-tickers-influxdb:8086
+    restart: always
+  influxdb:
+    image: 'quay.io/influxdb/influxdb:v2.0.4'
+    container_name: crypto-tickers-influxdb
+    volumes:
+      - './influxdbv2:/root/.influxdbv2'
+    ports:
+      - '8086:8086'
+  influxdb_cli:
+    links:
+      - influxdb
+    image: 'quay.io/influxdb/influxdb:v2.0.4'
+    container_name: crypto-tickers-influxdb-setup
+    entrypoint: >-
+      influx setup --bucket ${INFLUXDB_BUCKET} -t ${INFLUXDB_TOKEN} -o ${INFLUXDB_ORG}
+      --username=influx_username --password=influx_password
+      --host=http://crypto-tickers-influxdb:8086 -f
+    restart: 'on-failure:5'
+    depends_on:
+      - influxdb
+  grafana:
+    container_name: crypto-tickers-grafana
+    image: grafana/grafana
+    ports:
+      - '3000:3000'

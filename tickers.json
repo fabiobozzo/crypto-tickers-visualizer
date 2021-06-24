@@ -1,0 +1,17 @@
+{
+    "tickers": [
+        {
+            "coin": "BTC",
+            "quotes": [
+                "USD",
+                "EUR"
+            ]
+        },
+        {
+            "coin": "ETH",
+            "quotes": [
+                "USD"
+            ]
+        }
+    ]
+}

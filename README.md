@@ -1,1 +1,2 @@
-# crypto-tickers-visualizer
+# Cryptocurrencies tickers visualizer
+
