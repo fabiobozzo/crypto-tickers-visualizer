@@ -11,9 +11,5 @@ create-images:
 start: 
 	docker-compose up -d --build
 
-stop: ## stop docker images
-	docker-compose down
-
-destroy: ## stop and remove docker images
+stop: 
 	docker-compose down -v
-
